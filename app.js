@@ -1,29 +1,29 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var cors = require('cors')
-var _ = require("lodash");
-var jwt = require('jsonwebtoken');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors')
+const _ = require("lodash");
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 // Passport 
-var passport = require('passport');
-var passportJWT = require("passport-jwt");
-var ExtractJwt = passportJWT.ExtractJwt;
-var JwtStrategy = passportJWT.Strategy;
+const passport = require('passport');
+const passportJWT = require("passport-jwt");
+const ExtractJwt = passportJWT.ExtractJwt;
+const JwtStrategy = passportJWT.Strategy;
 
 // Config File
 let config = require('./config/settings.js')
 
 // Routes
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
 
 // Initialize Express
-var app = express();
+const app = express();
 
 // CORS-ENABLE
 app.use(function(req, res, next) {
@@ -58,14 +58,14 @@ mongoose.connect(config.database);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(function(err, req, res, next) {
       res.status(err.status || 500);
       res.send({
